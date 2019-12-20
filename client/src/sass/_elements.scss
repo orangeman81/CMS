@@ -1,0 +1,14 @@
+#mainFooter {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 24px;
+  color: $off-white;
+  background-color: $primary;
+  p {
+      margin: 0
+  }
+}

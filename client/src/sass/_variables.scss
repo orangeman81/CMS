@@ -1,0 +1,28 @@
+// variables
+// colors
+$primary: map-get($client-primary, 500);
+$accent: map-get($client-accent, 500);
+$gray: map-get($client-gray, 500);
+$lGray: map-get($client-gray, 300);
+$dGray: map-get($client-gray, 700);
+$overlay: rgba(0, 0, 0, .12);
+$white: #ffffff;
+$off-white: rgba(255, 255, 255, .87);
+$off-black: rgba(0, 0, 0, .87);
+// grid breakpoints
+$columns: 12;
+$desktop: 1440px;
+$laptop: 1366px;
+$tablet: 1024px;
+$mobile: 720px;
+$desktop-up: "only screen and (min-width : #{$desktop + 1})";
+$laptop-up: "only screen and (min-width : #{$laptop + 1})";
+$tablet-up: "only screen and (min-width : #{$tablet + 1})";
+$desktop-down: "only screen and (max-width : #{$desktop})";
+$laptop-down: "only screen and (max-width : #{$laptop})";
+$tablet-down: "only screen and (max-width : #{$tablet})";
+// utility
+$ease: all .3s ease;
+$ease-in: all .3s ease-in;
+$ease-out: all .3s ease-out;
+$textElevation: 0 2px 2px rgba(0, 0, 0, 0.56);

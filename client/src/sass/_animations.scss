@@ -1,0 +1,39 @@
+@keyframes slide-out {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes emphasis {
+  0% {
+    transform: translateX(0, 0) rotate(0);
+    filter: blur(1px);
+  }
+
+  40% {
+    transform: translateX(1px) rotate(1deg);
+    filter: blur(0);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+}
+
+@keyframes tile-out {
+  from {
+    opacity: 0;
+    transform: rotate(0) translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(45deg) translateX(0);
+  }
+}

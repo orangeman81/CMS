@@ -1,0 +1,50 @@
+// container
+.container {
+  margin: 24px auto;
+  width: 95%;
+}
+
+// flex-grid
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem -0.5rem;
+  $i: 1;
+  .col {
+    padding: 0.5rem;
+    box-sizing: border-box;
+    @while $i <=$columns {
+      $perc: unquote((100 / ($columns / $i)) + "%");
+      &.s#{$i} {
+        flex: 1 0 $perc;
+        @extend .fw;
+      }
+      $i: $i + 1;
+    }
+    @media screen and (min-width: $laptop) {
+      $i: 1;
+      @while $i <=$columns {
+        $perc: unquote((100 / ($columns / $i)) + "%");
+        &.m#{$i} {
+          flex: 0 1 $perc;
+        }
+        $i: $i + 1;
+      }
+    }
+    @media screen and (min-width: $desktop) {
+      $i: 1;
+      @while $i <=$columns {
+        $perc: unquote((100 / ($columns / $i)) + "%");
+        &.l#{$i} {
+          flex: 0 1 $perc;
+        }
+        $i: $i + 1;
+      }
+    }
+  }
+  .fw {
+    @media screen and (max-width: $mobile) {
+      flex-basis: 100%;
+    }
+  }
+}

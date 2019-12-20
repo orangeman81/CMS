@@ -1,0 +1,16 @@
+// Custom Theming for Angular Material
+@import "~@angular/material/theming";
+@include mat-core();
+$client-primary: mat-palette($mat-cyan);
+$client-accent: mat-palette($mat-orange, A200, A100, A400);
+
+$client-warn: mat-palette($mat-red);
+$client-gray: mat-palette($mat-gray);
+
+$client-theme: mat-light-theme($client-primary, $client-accent, $client-warn);
+
+@include angular-material-theme($client-theme);
+
+body {
+  @extend .mat-typography;
+}

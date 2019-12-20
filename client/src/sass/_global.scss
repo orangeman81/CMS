@@ -1,0 +1,82 @@
+//user agent overrides
+html,
+body {
+  height: 100%;
+}
+
+body,
+figure,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+
+  li {
+    list-style: none;
+  }
+}
+
+// layout min-height fix
+main {
+  min-height: calc(100vh - 164px);
+  position: relative;
+}
+
+// images
+img.res {
+  max-width: 100%;
+}
+
+// ui elements
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  a:not(:last-child),
+  button:not(:last-child) {
+    margin-right: 16px;
+  }
+}
+
+.fabWrapper {
+  position: absolute;
+  top: auto;
+  bottom: 16px;
+  right: 0;
+}
+
+.user-img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+//app overlay
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 998;
+
+  & > * {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// scrollbar
+::-webkit-scrollbar {
+  width: 16px;
+  background: $lGray;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $dGray;
+}
