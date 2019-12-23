@@ -1,0 +1,87 @@
+// transitions
+.ease {
+  transition: $ease;
+}
+
+.ease-in {
+  transition: $ease-in;
+}
+
+.ease-out {
+  transition: $ease-out;
+}
+
+//colors
+.bg-primary {
+  background: $primary;
+}
+
+.bg-accent {
+  background: $accent;
+}
+
+.imgRes {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.f-center {
+  align-items: center;
+}
+
+.f-end {
+  justify-content: flex-end;
+}
+
+.f-space-around {
+  justify-content: space-around;
+}
+
+.f-space-between {
+  justify-content: space-between;
+}
+
+.f-space-center {
+  justify-content: center;
+}
+
+.f-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-layout-a {
+  @extend .f-space-around;
+  @extend .f-center;
+  @extend .f-wrap;
+}
+
+.flex-layout-b {
+  @extend .f-space-between;
+  @extend .f-center;
+  @extend .f-wrap;
+}
+
+.flex-layout-c {
+  @extend .f-space-center;
+  @extend .f-center;
+  @extend .f-wrap;
+}
+
+.hide-laptop {
+  @media #{$laptop-up} {
+    display: none;
+  }
+}
+
+.hide-tablet {
+  @media #{$laptop-down} {
+    display: none;
+  }
+}
+
+@include make-spaces();

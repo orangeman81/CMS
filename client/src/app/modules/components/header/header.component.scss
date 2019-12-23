@@ -1,0 +1,18 @@
+:host {
+  display: block;
+
+  header {
+    min-height: 140px;
+    color: #fff;
+    flex-basis: 100vw;
+    box-sizing: border-box;
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    justify-content: space-between;
+
+    & span:last-of-type {
+      align-self: flex-end;
+    }
+  }
+}

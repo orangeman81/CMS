@@ -1,10 +1,12 @@
-<div class="row">
-    <div class="col m4 s6" *ngFor="let route of routes">
-        <a class="tile" [routerLink]="[route.path]">
-            <span class="tile-icon">
-                <mat-icon inline="true">{{route.icon}}</mat-icon>
-            </span>
-            <h3>{{route.path}}</h3>
-        </a>
+<main class="container">
+    <div class="row">
+        <div class="col m4 s6" *ngFor="let route of routes">
+            <a class="tile" [routerLink]="['../', route.path]">
+                <span class="tile-icon">
+                    <mat-icon inline="true">{{route.icon}}</mat-icon>
+                </span>
+                <h3>{{route.path}}</h3>
+            </a>
+        </div>
     </div>
-</div>
+</main>

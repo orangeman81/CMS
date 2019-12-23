@@ -3,9 +3,9 @@
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
-            <mat-list-item *ngFor="let route of routes">
+            <mat-list-item *ngFor="let route of routes" [routerLink]="[route.path]">
                 <mat-icon matListIcon color="primary">{{route.icon}}</mat-icon>
-                <a matLine [routerLink]="[route.path]">{{route.path}}</a>
+                <a matLine>{{route.path}}</a>
             </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>
@@ -17,9 +17,7 @@
             </button>
             <span>Tecno CMS</span>
         </mat-toolbar>
-        <main class="container">
-            <router-outlet></router-outlet>
-        </main>
+        <router-outlet></router-outlet>
         <footer id="mainFooter">
             <p>Tecno CMS</p>
             <p>©Tecno srl 2019</p>
