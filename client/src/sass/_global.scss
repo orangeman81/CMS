@@ -73,10 +73,11 @@ img.res {
 
 // scrollbar
 ::-webkit-scrollbar {
-  width: 16px;
+  width: 8px;
   background: $lGray;
 }
 
 ::-webkit-scrollbar-thumb {
   background: $dGray;
+  border-radius: 4px
 }

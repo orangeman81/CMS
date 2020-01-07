@@ -7,6 +7,7 @@ import { DetailsComponent } from './details/details.component';
 import { MakeComponent } from './make/make.component';
 import { SitesComponent } from './sites.component';
 import { ComponentsModule } from '../components/components.module';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ComponentsModule } from '../components/components.module';
   imports: [
     CommonModule,
     SitesRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    QuillModule.forRoot()
   ]
 })
 export class SitesModule { }

@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
@@ -21,11 +22,14 @@ import { SearchComponent } from './search/search.component';
     MatInputModule
   ],
   exports: [
+    HeaderComponent,
     SearchComponent,
     MatButtonModule,
-    MatIconModule,
     MatListModule,
-    HeaderComponent
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ]
 })
 export class ComponentsModule { }
