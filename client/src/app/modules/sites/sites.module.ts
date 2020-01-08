@@ -7,16 +7,18 @@ import { DetailsComponent } from './details/details.component';
 import { MakeComponent } from './make/make.component';
 import { SitesComponent } from './sites.component';
 import { ComponentsModule } from '../components/components.module';
-import { QuillModule } from 'ngx-quill';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SitesFormComponent } from './sites-form/sites-form.component';
+import { RouterFormComponent } from './router-form/router-form.component';
 
 
 @NgModule({
-  declarations: [ListComponent, DetailsComponent, MakeComponent, SitesComponent],
+  declarations: [ListComponent, DetailsComponent, MakeComponent, SitesComponent, SitesFormComponent, RouterFormComponent],
   imports: [
     CommonModule,
     SitesRoutingModule,
     ComponentsModule,
-    QuillModule.forRoot()
+    MatTabsModule
   ]
 })
 export class SitesModule { }
