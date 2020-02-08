@@ -19,19 +19,19 @@ export class RouterFormComponent implements OnInit, OnDestroy {
   pageList: any[] = [
     {
       name: "homepage",
-      _id: "1234455151551551"
+      pageId: "1234455151551551"
     },
     {
       name: "products",
-      _id: "4251425622114689"
+      pageId: "4251425622114689"
     },
     {
       name: "features",
-      _id: "1556322791449244"
+      pageId: "1556322791449244"
     },
     {
       name: "contacts",
-      _id: "2146515252441236"
+      pageId: "2146515252441236"
     }
   ]
 
