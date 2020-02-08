@@ -9,21 +9,23 @@ export const SitesSchema = new mongoose.Schema({
     },
     router: [
         {
-            path: String,
-            icon: String,
-            pageId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Page',
-                required: true
-            },
-            sections: [{
-                path: String,
-                icon: String,
+            page: {
+                name: String,
                 pageId: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'Page',
                     required: true
                 }
+            },
+            sections: [{
+                page: {
+                    name: String,
+                    pageId: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'Page',
+                        required: true
+                    }
+                },
             }]
         }
     ],
