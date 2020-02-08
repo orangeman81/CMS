@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormArray } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-router-form',
   templateUrl: './router-form.component.html',
   styleUrls: ['./router-form.component.scss']
 })
-export class RouterFormComponent implements OnInit {
+export class RouterFormComponent implements OnInit, OnDestroy {
 
-  pages: any[] = [
+  private sub: Subscription = new Subscription();
+
+  pageList: any[] = [
     {
       name: "homepage",
       _id: "1234455151551551"
@@ -30,7 +34,12 @@ export class RouterFormComponent implements OnInit {
 
   routerForm = this.fb.group({
     routes: this.fb.array([
-      this.fb.control({})
+      this.fb.group({
+        page: this.fb.control({}),
+        sections: this.fb.array([
+          this.fb.control("")
+        ])
+      })
     ])
   })
 
@@ -38,22 +47,34 @@ export class RouterFormComponent implements OnInit {
 
   addRoute() {
     this.routes.push(
-      this.fb.control({})
+      this.fb.group({
+        page: this.fb.control(''),
+        sections: this.fb.array([
+          this.fb.control("")
+        ])
+      })
     );
     console.log(this.routerForm.value)
   }
 
   addSubRoute(i: number) {
-    this.routes
-      .controls[i]
-      .setValue({
-        ...this.routes.controls[i].value,
-        sections: this.fb.array([''])
-      })
-    console.log(this.routes.controls[i]['sections'])
+    (<FormArray>(<FormGroup>(<FormArray>this.routerForm.controls['routes'])
+      .controls[i]).controls['sections']).push(this.fb.control(""));
   }
 
   ngOnInit() {
+    this.sub = this.routerForm
+      .valueChanges
+      .pipe(
+        debounceTime(800),
+        distinctUntilChanged(),
+        filter((value: FormGroup) => value.valid)
+      )
+      .subscribe(console.log)
+  }
+
+  ngOnDestroy() {
+    this.sub ? this.sub.unsubscribe() : null;
   }
 
 }
