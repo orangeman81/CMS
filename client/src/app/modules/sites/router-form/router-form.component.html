@@ -3,7 +3,7 @@
         <div class="mb-56" *ngFor="let route of routes.controls; index as i;">
             <span [formGroupName]="i">
                 <mat-form-field appearance="outline">
-                    <mat-label>New route</mat-label>
+                    <mat-label>Route</mat-label>
                     <mat-select formControlName="page">
                         <mat-option *ngFor="let page of pageList" [value]="page">
                             {{page.name}}
@@ -11,8 +11,9 @@
                     </mat-select>
                 </mat-form-field>
                 <span formArrayName="sections">
-                    <mat-form-field appearance="outline" *ngFor="let subroute of route.get('sections')['controls']; let sectionIndex = index;">
-                        <mat-label>New subroute</mat-label>
+                    <mat-form-field appearance="outline"
+                        *ngFor="let subroute of route.get('sections')['controls']; let sectionIndex = index;">
+                        <mat-label>Subroute</mat-label>
                         <mat-select [formControlName]="sectionIndex">
                             <mat-option *ngFor="let page of pageList" [value]="page">
                                 {{page.name}}
@@ -22,7 +23,9 @@
                 </span>
             </span>
             <span class="actions">
-                <button mat-stroked-button type="button" (click)="addSubRoute(i)">add subroute</button>
+                <button mat-icon-button aria-label="add a new subroute" type="button" (click)="handleSubRoute(i, true)">
+                    <mat-icon>add</mat-icon>
+                </button>
             </span>
         </div>
     </div>

@@ -19,8 +19,12 @@ export class RouterFormComponent implements OnInit, OnDestroy {
       _id: "1234455151551551"
     },
     {
-      name: "section",
+      name: "products",
       _id: "4251425622114689"
+    },
+    {
+      name: "features",
+      _id: "1556322791449244"
     },
     {
       name: "contacts",
@@ -35,10 +39,11 @@ export class RouterFormComponent implements OnInit, OnDestroy {
   routerForm = this.fb.group({
     routes: this.fb.array([
       this.fb.group({
-        page: this.fb.control({}),
-        sections: this.fb.array([
-          this.fb.control("")
-        ])
+        page: this.fb.control({
+          name: "homepage",
+          _id: "1234455151551551"
+        }),
+        sections: this.fb.array([])
       })
     ])
   })
@@ -49,17 +54,19 @@ export class RouterFormComponent implements OnInit, OnDestroy {
     this.routes.push(
       this.fb.group({
         page: this.fb.control(''),
-        sections: this.fb.array([
-          this.fb.control("")
-        ])
+        sections: this.fb.array([])
       })
     );
-    console.log(this.routerForm.value)
   }
 
-  addSubRoute(i: number) {
-    (<FormArray>(<FormGroup>(<FormArray>this.routerForm.controls['routes'])
-      .controls[i]).controls['sections']).push(this.fb.control(""));
+  handleSubRoute(i: number, action: boolean) {
+    const subroute = (<FormArray>(<FormGroup>(<FormArray>this.routerForm.controls['routes'])
+      .controls[i]).controls['sections']);
+    console.log(i)
+    if (action === true)
+      subroute.push(this.fb.control(""));
+    else
+      subroute.removeAt(i);
   }
 
   ngOnInit() {
@@ -68,7 +75,7 @@ export class RouterFormComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(800),
         distinctUntilChanged(),
-        filter((value: FormGroup) => value.valid)
+        filter(() => this.routerForm.valid)
       )
       .subscribe(console.log)
   }
