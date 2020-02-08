@@ -1,12 +1,12 @@
 <mat-tab-group>
     <mat-tab label="Site">
         <main class="container">
-            <app-sites-form></app-sites-form>
+            <app-sites-form ($action)="save($event)"></app-sites-form>
         </main>
     </mat-tab>
     <mat-tab label="Router">
         <main class="container">
-            <app-router-form></app-router-form>
+            <app-router-form ($action)="save($event)"></app-router-form>
         </main>
     </mat-tab>
 </mat-tab-group>

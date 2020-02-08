@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
@@ -12,6 +12,9 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 export class RouterFormComponent implements OnInit, OnDestroy {
 
   private sub: Subscription = new Subscription();
+
+  @Output()
+  private $action: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   pageList: any[] = [
     {
@@ -36,16 +39,13 @@ export class RouterFormComponent implements OnInit, OnDestroy {
     return this.routerForm.get('routes') as FormArray;
   }
 
-  routerForm = this.fb.group({
+  routerForm: FormGroup = this.fb.group({
     routes: this.fb.array([
       this.fb.group({
-        page: this.fb.control({
-          name: "homepage",
-          _id: "1234455151551551"
-        }),
+        page: this.fb.control(this.pageList[0]),
         sections: this.fb.array([])
       })
-    ])
+    ], Validators.required)
   })
 
   constructor(private fb: FormBuilder) { }
@@ -60,24 +60,24 @@ export class RouterFormComponent implements OnInit, OnDestroy {
   }
 
   handleSubRoute(i: number, action: boolean) {
-    const subroute = (<FormArray>(<FormGroup>(<FormArray>this.routerForm.controls['routes'])
+    const subroutes = (<FormArray>(<FormGroup>(<FormArray>this.routes)
       .controls[i]).controls['sections']);
-    console.log(i)
+
     if (action === true)
-      subroute.push(this.fb.control(""));
+      subroutes.push(this.fb.control(""));
     else
-      subroute.removeAt(i);
+      subroutes.length > 0 ? subroutes.removeAt(subroutes.length - 1) : this.routes.removeAt(i);
   }
 
   ngOnInit() {
     this.sub = this.routerForm
       .valueChanges
       .pipe(
-        debounceTime(800),
+        debounceTime(1600),
         distinctUntilChanged(),
         filter(() => this.routerForm.valid)
       )
-      .subscribe(console.log)
+      .subscribe((value: FormGroup) => this.$action.emit(value))
   }
 
   ngOnDestroy() {

@@ -1,4 +1,10 @@
 form {
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    @extend .mb-24;
+  }
   mat-form-field {
     width: 100%;
   }

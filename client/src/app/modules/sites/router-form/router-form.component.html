@@ -1,6 +1,6 @@
 <form class="row pl-72 pr-72" [formGroup]="routerForm">
     <div class="col s12" formArrayName="routes">
-        <div class="mb-56" *ngFor="let route of routes.controls; index as i;">
+        <fieldset *ngFor="let route of routes.controls; index as i;">
             <span [formGroupName]="i">
                 <mat-form-field appearance="outline">
                     <mat-label>Route</mat-label>
@@ -12,7 +12,7 @@
                 </mat-form-field>
                 <span formArrayName="sections">
                     <mat-form-field appearance="outline"
-                        *ngFor="let subroute of route.get('sections')['controls']; let sectionIndex = index;">
+                        *ngFor="let subroute of route.get('sections')['controls']; index as sectionIndex;">
                         <mat-label>Subroute</mat-label>
                         <mat-select [formControlName]="sectionIndex">
                             <mat-option *ngFor="let page of pageList" [value]="page">
@@ -26,8 +26,11 @@
                 <button mat-icon-button aria-label="add a new subroute" type="button" (click)="handleSubRoute(i, true)">
                     <mat-icon>add</mat-icon>
                 </button>
+                <button mat-icon-button aria-label="add a new subroute" type="button" (click)="handleSubRoute(i, false)">
+                    <mat-icon>remove</mat-icon>
+                </button>
             </span>
-        </div>
+        </fieldset>
     </div>
 </form>
 <span class="fabWrapper">

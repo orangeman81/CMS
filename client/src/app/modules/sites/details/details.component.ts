@@ -12,4 +12,8 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
   }
 
+  public save(value) {
+    console.log(value);
+  }
+
 }
