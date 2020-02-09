@@ -18,13 +18,6 @@ export class SearchComponent implements OnInit {
   get query() {
     return this.queryForm.get('query').value;
   }
-  set query(val: string) {
-    this.queryForm.get('query').setValue(val);
-  }
-
-  reset() {
-    this.query = "";
-  }
 
   @Input()
   param: string = "title";
@@ -47,6 +40,10 @@ export class SearchComponent implements OnInit {
         })
       )
       .subscribe(query => this.search.emit(query))
+  }
+
+  reset() {
+    this.queryForm.get('query').reset();
   }
 
   ngOnDestroy() {
