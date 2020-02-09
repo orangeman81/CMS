@@ -35,8 +35,8 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.sub = this.queryForm.valueChanges
       .pipe(
-        distinctUntilChanged(),
         debounceTime(600),
+        distinctUntilChanged(),
         map(form => {
           let queryParams: string = "";
           console.log(form)
