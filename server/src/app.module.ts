@@ -13,7 +13,9 @@ import { MongooseModule } from '@nestjs/mongoose';
     PagesModule,
     PostsModule,
     EventsModule,
-    MongooseModule.forRoot('mongodb+srv://stefanoImparato:madwolf1981@cluster0-fj9cw.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true })
+    MongooseModule.forRoot('mongodb+srv://stefanoImparato:madwolf1981@cluster0-fj9cw.mongodb.net/test?retryWrites=true&w=majority', {
+      useUnifiedTopology: true, useNewUrlParser: true
+    })
   ],
   controllers: [AppController],
   providers: [AppService]

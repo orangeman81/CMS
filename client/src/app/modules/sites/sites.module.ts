@@ -10,6 +10,7 @@ import { ComponentsModule } from '../components/components.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SitesFormComponent } from './sites-form/sites-form.component';
 import { RouterFormComponent } from './router-form/router-form.component';
+import { SitesStore } from 'src/app/store/sites/sitesStore';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { RouterFormComponent } from './router-form/router-form.component';
     SitesRoutingModule,
     ComponentsModule,
     MatTabsModule
-  ]
+  ],
+  providers: [SitesStore]
 })
 export class SitesModule { }
