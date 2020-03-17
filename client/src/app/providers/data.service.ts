@@ -5,39 +5,48 @@ import { Observable } from 'rxjs';
 import { first, shareReplay, last } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DataService<T> {
 
-  private apiUrl: String = environment.apiUrl;
-  constructor(private http: HttpClient) { };
+    private apiUrl: String = environment.apiUrl;
 
-  $find(url: string): Observable<T[]> {
-      return this.http.get<any>(this.apiUrl + url)
-          .pipe(
-              first(),
-              shareReplay()
-          );
-  }
+    constructor(private http: HttpClient) { };
 
-  $add(url: string, payload: any): Observable<T> {
-      return this.http.post<any>(this.apiUrl + url, payload)
-          .pipe(
-              last()
-          );
-  }
+    public $find(url: string): Observable<T[]> {
+        return this.http.get<any>(this.apiUrl + url)
+            .pipe(
+                first(),
+                shareReplay()
+            );
+    }
 
-  $update(url: string, id: string, payload: any): Observable<T> {
-      return this.http.put<any>(this.apiUrl + url + '/' + id, payload)
-          .pipe(
-              last()
-          );
-  }
+    public $findOne(url: string, id: string): Observable<T> {
+        return this.http.get<any>(`${this.apiUrl + url}/${id}`)
+            .pipe(
+                first(),
+                shareReplay()
+            );
+    }
 
-  $delete(url: string, id: string): Observable<T> {
-      return this.http.delete<any>(this.apiUrl + url + '/' + id)
-          .pipe(
-              last()
-          );
-  }
+    public $add(url: string, payload: any): Observable<T> {
+        return this.http.post<any>(this.apiUrl + url, payload)
+            .pipe(
+                last()
+            );
+    }
+
+    public $update(url: string, id: string, payload: any): Observable<T> {
+        return this.http.put<any>(`${this.apiUrl + url}/${id}`, payload)
+            .pipe(
+                last()
+            );
+    }
+
+    public $delete(url: string, id: string): Observable<T> {
+        return this.http.delete<any>(`${this.apiUrl + url}/${id}`)
+            .pipe(
+                last()
+            );
+    }
 }

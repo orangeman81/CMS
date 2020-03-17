@@ -4,7 +4,7 @@ import { ListComponent } from './list/list.component';
 import { DetailsComponent } from './details/details.component';
 import { MakeComponent } from './make/make.component';
 import { SitesComponent } from './sites.component';
-
+import { SitesResolver } from './resolvers/sites.resolver';
 
 const routes: Routes = [
   {
@@ -17,7 +17,10 @@ const routes: Routes = [
       },
       {
         path: "details/:id",
-        component: DetailsComponent
+        component: DetailsComponent,
+        resolve: {
+          details: SitesResolver
+        }
       },
       {
         path: "make",

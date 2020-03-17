@@ -1,7 +1,7 @@
 <main class="container">
     <mat-action-list>
         <h3 mat-subheader>Sites</h3>
-        <mat-list-item [routerLink]="['details', site._id]" *ngFor="let site of $data | async">
+        <mat-list-item *ngFor="let site of $data | async" [routerLink]="['details', site._id]">
             <h3 matLine> {{site.name}} </h3>
             <p matLine>
                 {{site.meta.title}}

@@ -1,7 +1,8 @@
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input, AfterContentInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { Site } from 'src/app/shared/models/site';
 
 @Component({
   selector: 'app-sites-form',
@@ -14,38 +15,54 @@ export class SitesFormComponent implements OnInit, OnDestroy {
 
   private sub: Subscription = new Subscription();
 
+  @Input()
+  private data: Site;
+
+  @Input()
+  public autosave: boolean = false;
+
   @Output()
   private $action: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-  public siteForm: FormGroup = this.fb.group({
-    name: this.fb.control('', Validators.required),
-    meta: this.fb.group({
-      title: this.fb.control(''),
-      description: this.fb.control(''),
-      keywords: this.fb.control(''),
-    }, Validators.required),
-    footer: this.fb.group({
-      title: this.fb.control('', Validators.required),
-      address: this.fb.control('', Validators.required),
-      phone: this.fb.control('', [Validators.minLength(10)]),
-      email: this.fb.control(''),
-      copyright: this.fb.control(''),
-    })
-  });
+  public siteForm: FormGroup;
 
   ngOnInit(): void {
+    this.siteForm = this.fb.group({
+      name: this.fb.control(this.initValue(this.data?.name), Validators.required),
+      meta: this.fb.group({
+        title: this.fb.control(this.initValue(this.data?.meta.title)),
+        description: this.fb.control(this.initValue(this.data?.meta.description)),
+        keywords: this.fb.control(this.initValue(this.data?.meta.keywords)),
+      }, Validators.required),
+      footer: this.fb.group({
+        title: this.fb.control(this.initValue(this.data?.footer.title), Validators.required),
+        address: this.fb.control(this.initValue(this.data?.footer.address), Validators.required),
+        phone: this.fb.control(this.initValue(this.data?.footer.phone), [Validators.minLength(10)]),
+        email: this.fb.control(this.initValue(this.data?.footer.email)),
+        copyright: this.fb.control(this.initValue(this.data?.footer.copyright), Validators.required),
+      })
+    });
+
     this.sub = this.siteForm
       .valueChanges
       .pipe(
         debounceTime(1600),
         distinctUntilChanged(),
-        filter(() => this.siteForm.valid)
+        filter(() => this.siteForm.valid && this.autosave)
       )
-      .subscribe((value: FormGroup) => this.$action.emit(value))
+      .subscribe(() => this.save())
+  }
+
+  private initValue(prop: string) {
+    return prop != undefined && prop != null ? prop : '';
+  }
+
+  public save() {
+    this.$action.emit(this.siteForm.value);
   }
 
   ngOnDestroy(): void {
-    this.sub ? this.sub.unsubscribe() : null;
+    this.sub.closed || this.sub.unsubscribe();
   }
 
 }

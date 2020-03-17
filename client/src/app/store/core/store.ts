@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, pluck, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Action } from './action';
 
 export abstract class Store<T> {
@@ -28,6 +28,15 @@ export abstract class Store<T> {
 
     public dispatch(action: Action) {
         this.state = this.reducer(action, this.state);
+    }
+
+    public $select<T>(props: string[]): Observable<T> {
+        return this.$state
+            .pipe(
+                pluck(...props),
+                map(prop => prop as T),
+                distinctUntilChanged(),
+            )
     }
 
 }

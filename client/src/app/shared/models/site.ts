@@ -8,6 +8,7 @@ export interface Site {
 export interface SiteMeta {
     title: string;
     description: string;
+    keywords: string;
 }
 export interface SiteFooter {
     title: string;

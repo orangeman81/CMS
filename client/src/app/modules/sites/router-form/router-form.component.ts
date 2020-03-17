@@ -81,7 +81,7 @@ export class RouterFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub ? this.sub.unsubscribe() : null;
+    this.sub.closed || this.sub.unsubscribe();
   }
 
 }

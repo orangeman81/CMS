@@ -10,7 +10,7 @@ import { SitesStore } from 'src/app/store/sites/sitesStore';
 })
 export class ListComponent {
 
-  $data: Observable<Site[]> = this.store.$data;
+  $data: Observable<Site[]> = this.store.$select<Site[]>(['data']);
 
   constructor(private store: SitesStore) { }
 

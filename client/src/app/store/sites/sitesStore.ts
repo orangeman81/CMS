@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Store } from '../core/store';
 import { sitesReducer } from './sitesReducer';
-import { distinctUntilChanged, pluck } from 'rxjs/operators';
 import { SitesState } from './sitesState';
+import { Site } from 'src/app/shared/models/site';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SitesStore extends Store<SitesState> {
-
     constructor() {
         const initialState: SitesState = {
             data: [],
@@ -16,10 +17,13 @@ export class SitesStore extends Store<SitesState> {
         super(initialState, sitesReducer)
     };
 
-    public get $data() {
-        return this.$state.pipe(
-            pluck('data'),
-            distinctUntilChanged()
-        )
+    $findOne(id: string): Observable<Site> {
+        return this.$select(['data'])
+            .pipe(
+                map(
+                    (sites: Site[]) =>
+                        sites.find((site: Site) => site._id === id)
+                )
+            )
     }
 }

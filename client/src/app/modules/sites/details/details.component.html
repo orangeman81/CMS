@@ -1,7 +1,7 @@
 <mat-tab-group>
     <mat-tab label="Site">
         <main class="container">
-            <app-sites-form ($action)="save($event)"></app-sites-form>
+            <app-sites-form [data]="$details | async" [autosave]="true" ($action)="save($event)"></app-sites-form>
         </main>
     </mat-tab>
     <mat-tab label="Router">

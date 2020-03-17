@@ -11,6 +11,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SitesFormComponent } from './sites-form/sites-form.component';
 import { RouterFormComponent } from './router-form/router-form.component';
 import { SitesStore } from 'src/app/store/sites/sitesStore';
+import { SitesResolver } from './resolvers/sites.resolver';
 
 
 @NgModule({
@@ -21,6 +22,6 @@ import { SitesStore } from 'src/app/store/sites/sitesStore';
     ComponentsModule,
     MatTabsModule
   ],
-  providers: [SitesStore]
+  providers: [SitesStore, SitesResolver]
 })
 export class SitesModule { }
