@@ -47,7 +47,10 @@ export class SitesFormComponent implements OnInit, OnDestroy {
       .valueChanges
       .pipe(
         debounceTime(1600),
-        distinctUntilChanged(),
+        distinctUntilChanged((a, b) =>
+          JSON.stringify(a) ===
+          JSON.stringify(b)
+        ),
         filter(() => this.siteForm.valid && this.autosave)
       )
       .subscribe(() => this.save())

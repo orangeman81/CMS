@@ -74,7 +74,10 @@ export class RouterFormComponent implements OnInit, OnDestroy {
       .valueChanges
       .pipe(
         debounceTime(1600),
-        distinctUntilChanged(),
+        distinctUntilChanged((a, b) =>
+          JSON.stringify(a) ===
+          JSON.stringify(b)
+        ),
         filter(() => this.routerForm.valid)
       )
       .subscribe((value: FormGroup) => this.$action.emit(value))
