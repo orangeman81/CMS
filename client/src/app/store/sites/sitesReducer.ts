@@ -22,8 +22,16 @@ export function sitesReducer(action: Action, state: SitesState): SitesState {
             return newState
         }
         case SitesActions.update: {
-            console.log("%citem updated", "background: yellow; color: black; padding: 4px");
-            return state
+            const updatedData = state.data
+                .map(item =>
+                    item._id === action.payload.id ? action.payload.item : item
+                );
+            const newState = {
+                ...state,
+                data: updatedData
+            }
+            console.log("%citem updated", "background: yellow; color: black; padding: 4px", newState);
+            return newState
         }
         case SitesActions.delete: {
             console.log("%citem deleted", "background: red; color: black; padding: 4px");

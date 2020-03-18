@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { Action } from 'src/app/store/core/action';
 import { SitesActions } from 'src/app/store/sites/sitesActions.enum';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-make',
@@ -18,12 +19,22 @@ export class MakeComponent implements OnDestroy {
 
   constructor(
     private data: DataService<Site>,
-    private store: SitesStore
+    private store: SitesStore,
+    private _snackBar: MatSnackBar
   ) { }
 
   public $save(formValue: FormGroup) {
     this.subscription = this.data.$add('sites', formValue)
-      .subscribe((site: Site) => this.store.dispatch(new Action(SitesActions.add, site)));
+      .subscribe((site: Site) => {
+        this.store.dispatch(new Action(SitesActions.add, site));
+        this.openSnackBar('added', site.name);
+      });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   ngOnDestroy() {

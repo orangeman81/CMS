@@ -18,7 +18,6 @@ export class SitesResolver implements Resolve<Site> {
         const paramId: string = route.paramMap.get('id');
         const $findOne: Observable<Site> = this.store.$findOne(paramId);
         const $fetchDetails: Observable<Site> = this.data.$findOne('sites', paramId);
-        console.log('%cresolver', 'background: black; color: white; padding: 4px;', paramId);
         return this.store.$select(['loaded'])
             .pipe(
                 switchMap(

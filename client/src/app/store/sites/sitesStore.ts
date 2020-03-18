@@ -11,8 +11,9 @@ export class SitesStore extends Store<SitesState> {
     constructor() {
         const initialState: SitesState = {
             data: [],
-            loaded: false,
-            query: ""
+            query: "",
+            page: 0,
+            loaded: false
         };
         super(initialState, sitesReducer)
     };

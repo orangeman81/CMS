@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [HeaderComponent, SearchComponent],
@@ -31,7 +31,8 @@ import { SearchComponent } from './search/search.component';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ]
 })
 export class ComponentsModule { }
